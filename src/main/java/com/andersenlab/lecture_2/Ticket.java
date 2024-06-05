@@ -31,13 +31,11 @@ public class Ticket {
         this.time = time;
     }
 
-    public Ticket(int id, String concertHall, int eventCode, long time,
+    public Ticket(String concertHall, int eventCode, long time,
                   boolean isPromo, char stadiumSector, double maxAllowedWeight, double price) {
-        idChecker(id);
         concertHallChecker(concertHall);
         eventCodeChecker(eventCode);
         stadiumSectorChecker(stadiumSector);
-        this.id = id;
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
