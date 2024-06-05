@@ -43,4 +43,19 @@ public class TicketService {
     private void sizeChecker() {
         if (tickets.size() >= 10) throw new RuntimeException("Ticket limit reached");
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("There are ")
+                .append(tickets.size())
+                .append(" tickets in the register:\n");
+
+        for (Ticket ticket : tickets) {
+            stringBuilder.append(ticket);
+            stringBuilder.append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
 }
