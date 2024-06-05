@@ -33,6 +33,14 @@ public class TicketService {
         fullTicket.setId(tickets.size());
     }
 
+    public Ticket getById(int id) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId() == id) return ticket;
+        }
+        System.out.println("There is no ticket in the storage with such ID");
+        return null;
+    }
+
     private void capacityChecker() {
         if (tickets.size() >= 10) throw new RuntimeException("Ticket limit reached");
     }
