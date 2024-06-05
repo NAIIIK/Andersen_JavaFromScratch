@@ -1,16 +1,46 @@
 package com.andersenlab.lecture_2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketService {
 
-    public static void main(String[] args) {
-        long time = System.currentTimeMillis() / 1000L;
+    List<Ticket> tickets;
 
+    public TicketService() {
+        tickets = new ArrayList<>();
+    }
+
+    public void createEmptyTicket() {
+        sizeChecker();
         Ticket emptyTicket = new Ticket();
-        Ticket limitedTicket = new Ticket("Hall 1", 303, time);
-        Ticket fullTicket = new Ticket(234, "Hall 2", 399, time, true, 'C', 5.355, 99.99);
+        tickets.add(emptyTicket);
+        emptyTicket.setId(tickets.size());
+    }
 
-        System.out.println("Ticket with no args constructor:\n" + emptyTicket);
-        System.out.println("Ticket with limited args constructor:\n" + limitedTicket);
-        System.out.println("Ticket with all args constructor:\n" + fullTicket);
+    public void createLimitedTicket(String concertHall, int eventCode, long time) {
+        sizeChecker();
+        Ticket limitedTicket = new Ticket(concertHall, eventCode, time);
+        tickets.add(limitedTicket);
+        limitedTicket.setId(tickets.size());
+    }
+
+    public void createFullTicket(String concertHall, int eventCode, long time,
+                                 boolean isPromo, char stadiumSector, double maxAllowedWeight, double price) {
+        sizeChecker();
+        Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
+        tickets.add(fullTicket);
+        fullTicket.setId(tickets.size());
+    }
+
+    public Ticket getById(int id) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId() == id) return ticket;
+        }
+        return null;
+    }
+
+    private void sizeChecker() {
+        if (tickets.size() >= 10) throw new RuntimeException("Ticket limit reached");
     }
 }
