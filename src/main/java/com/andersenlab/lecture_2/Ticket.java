@@ -26,6 +26,7 @@ public class Ticket {
     public Ticket(String concertHall, int eventCode, long time) {
         concertHallChecker(concertHall);
         eventCodeChecker(eventCode);
+
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
@@ -36,6 +37,7 @@ public class Ticket {
         concertHallChecker(concertHall);
         eventCodeChecker(eventCode);
         stadiumSectorChecker(stadiumSector);
+
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
@@ -47,16 +49,19 @@ public class Ticket {
 
     public void setId(int id) {
         idChecker(id);
+
         this.id = id;
     }
 
     public void setConcertHall(String concertHall) {
         concertHallChecker(concertHall);
+
         this.concertHall = concertHall;
     }
 
     public void setEventCode(int eventCode) {
         eventCodeChecker(eventCode);
+
         this.eventCode = eventCode;
     }
 
@@ -70,6 +75,7 @@ public class Ticket {
 
     public void setStadiumSector(char stadiumSector) {
         stadiumSectorChecker(stadiumSector);
+
         this.stadiumSector = stadiumSector;
     }
 
@@ -100,6 +106,7 @@ public class Ticket {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+
         stringBuilder.append("Ticket\n")
                 .append("******")
                 .append("\nID: ")

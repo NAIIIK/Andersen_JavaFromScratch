@@ -13,6 +13,7 @@ public class TicketService {
 
     public void createEmptyTicket() {
         sizeChecker();
+
         Ticket emptyTicket = new Ticket();
         tickets.add(emptyTicket);
         emptyTicket.setId(tickets.size());
@@ -20,6 +21,7 @@ public class TicketService {
 
     public void createLimitedTicket(String concertHall, int eventCode, long time) {
         sizeChecker();
+
         Ticket limitedTicket = new Ticket(concertHall, eventCode, time);
         tickets.add(limitedTicket);
         limitedTicket.setId(tickets.size());
@@ -28,6 +30,7 @@ public class TicketService {
     public void createFullTicket(String concertHall, int eventCode, long time,
                                  boolean isPromo, char stadiumSector, double maxAllowedWeight, double price) {
         sizeChecker();
+
         Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
         tickets.add(fullTicket);
         fullTicket.setId(tickets.size());
@@ -37,6 +40,7 @@ public class TicketService {
         for (Ticket ticket : tickets) {
             if (ticket.getId() == id) return ticket;
         }
+
         return null;
     }
 
@@ -47,6 +51,7 @@ public class TicketService {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+
         stringBuilder.append("There are ")
                 .append(tickets.size())
                 .append(" tickets in the register:\n");
