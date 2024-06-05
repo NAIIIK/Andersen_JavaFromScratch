@@ -15,12 +15,14 @@ public class TicketService {
         capacityChecker();
         Ticket emptyTicket = new Ticket();
         tickets.add(emptyTicket);
+        emptyTicket.setId(tickets.size());
     }
 
     public void createLimitedTicket(String concertHall, int eventCode, long time) {
         capacityChecker();
         Ticket limitedTicket = new Ticket(concertHall, eventCode, time);
         tickets.add(limitedTicket);
+        limitedTicket.setId(tickets.size());
     }
 
     public void createFullTicket(String concertHall, int eventCode, long time, boolean isPromo,
@@ -28,6 +30,7 @@ public class TicketService {
         capacityChecker();
         Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
         tickets.add(fullTicket);
+        fullTicket.setId(tickets.size());
     }
 
     private void capacityChecker() {
