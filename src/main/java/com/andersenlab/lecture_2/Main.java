@@ -6,9 +6,9 @@ public class Main {
 
         long unixTime = System.currentTimeMillis() / 1000L;
 
-        service.createEmptyTicket();
-        service.createLimitedTicket("Hall 1", 151, unixTime);
-        service.createFullTicket("Hall 2", 155, unixTime, true,
+        service.createTicket();
+        service.createTicket("Hall 1", 151, unixTime);
+        service.createTicket("Hall 2", 155, unixTime, true,
                 'C', 5.555, 99.99);
 
         System.out.println(service.getById(2));
