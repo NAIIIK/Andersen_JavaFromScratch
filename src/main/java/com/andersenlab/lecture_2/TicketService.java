@@ -29,40 +29,6 @@ public class TicketService {
         Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
         tickets.add(fullTicket);
         fullTicket.setId(tickets.size());
-    }
-
-    public Ticket getById(int id) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getId() == id) return ticket;
-        }
-        System.out.println("There is no ticket in the storage with such ID");
-        return null;
-    }
-
-    public String getStorageInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("There are ")
-                .append(tickets.size())
-                .append(" tickets in the storage:\n");
-
-        for (Ticket ticket : tickets) {
-            stringBuilder.append(ticket)
-                    .append("\n");
-        }
-
-        return stringBuilder.toString();
-    }
-
-    private void capacityChecker() {
-        if (tickets.size() >= 10) throw new RuntimeException("Ticket limit reached");
-    }
-    public char getStadiumSector(char sector) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getStadiumSector() == sector) {
-                return ticket.getStadiumSector();
-            }
-        }
-        return '0';
+  
     }
 }
