@@ -33,6 +33,12 @@ public class TicketService {
         fullTicket.setId(tickets.size());
     }
 
+    public void createTicket(Ticket ticket) {
+        capacityChecker();
+        tickets.add(ticket);
+        ticket.setId(tickets.size());
+    }
+
     public Ticket getById(int id) {
         for (Ticket ticket : tickets) {
             if (ticket.getId() == id) return ticket;
