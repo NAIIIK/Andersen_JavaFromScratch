@@ -10,7 +10,7 @@ public class NullableWarningChecker {
                 try {
                     field.setAccessible(true);
                     if (field.get(o) == null) {
-                        System.out.println("Variable " + field.getName() + " is null");
+                        System.out.println("Variable [" + field.getName() + "] is null in [" + o.getClass().getSimpleName() + "]");
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
