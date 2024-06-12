@@ -1,7 +1,16 @@
 package com.andersenlab.lecture_2;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public abstract class Entity {
     public int id;
+
+    public Entity(int id) {
+        idChecker(id);
+
+        this.id = id;
+    }
 
     public int getId() {
         return id;
