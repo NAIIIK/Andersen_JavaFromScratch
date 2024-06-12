@@ -9,9 +9,8 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 @NoArgsConstructor
-public class Ticket {
+public class Ticket extends Entity {
 
-    private int id;
     private String concertHall = "unknown";
     private int eventCode;
     private long time;
@@ -47,48 +46,14 @@ public class Ticket {
         this.price = BigDecimal.valueOf(price);
     }
 
-    public void setId(int id) {
-        idChecker(id);
-
-        this.id = id;
-    }
-
-    public void setConcertHall(String concertHall) {
-        concertHallChecker(concertHall);
-
-        this.concertHall = concertHall;
-    }
-
-    public void setEventCode(int eventCode) {
-        eventCodeChecker(eventCode);
-
-        this.eventCode = eventCode;
-    }
-
     public void setTime(long time) {
         this.time = time;
-    }
-
-    public void setPromo(boolean promo) {
-        isPromo = promo;
     }
 
     public void setStadiumSector(char stadiumSector) {
         stadiumSectorChecker(stadiumSector);
 
         this.stadiumSector = stadiumSector;
-    }
-
-    public void setMaxAllowedWeight(double maxAllowedWeight) {
-        this.maxAllowedWeight = maxAllowedWeight;
-    }
-
-    public void setPrice(double price) {
-        this.price = BigDecimal.valueOf(price);
-    }
-
-    private void idChecker(int id) {
-        if (id / 1000 > 9) throw new TicketArgumentException("ID must contain no more than 4 digits");
     }
 
     private void concertHallChecker(String hall) {
