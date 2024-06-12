@@ -43,8 +43,7 @@ public class TicketService {
         for (Ticket ticket : tickets) {
             if (ticket.getId() == id) return ticket;
         }
-        System.out.println("There is no ticket in the storage with such ID");
-        return null;
+        throw new RuntimeException("There is no ticket with such ID");
     }
 
     public String getStorageInfo() {
