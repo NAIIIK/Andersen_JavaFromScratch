@@ -1,5 +1,6 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.users;
 
+import com.andersenlab.lecture_2.general.Entity;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

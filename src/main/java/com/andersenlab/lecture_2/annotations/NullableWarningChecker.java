@@ -1,4 +1,4 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.annotations;
 
 import java.lang.reflect.Field;
 

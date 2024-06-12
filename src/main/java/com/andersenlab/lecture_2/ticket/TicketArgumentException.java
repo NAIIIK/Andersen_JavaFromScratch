@@ -1,4 +1,4 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.ticket;
 
 public class TicketArgumentException extends RuntimeException {
 

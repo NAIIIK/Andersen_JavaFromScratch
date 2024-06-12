@@ -1,5 +1,10 @@
 package com.andersenlab.lecture_2;
 
+import com.andersenlab.lecture_2.ticket.TicketService;
+import com.andersenlab.lecture_2.users.Admin;
+import com.andersenlab.lecture_2.users.Client;
+import com.andersenlab.lecture_2.users.User;
+
 public class Main {
     public static void main(String[] args) {
         TicketService service = new TicketService();

@@ -1,5 +1,6 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.general;
 
+import com.andersenlab.lecture_2.ticket.TicketArgumentException;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

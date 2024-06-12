@@ -1,4 +1,4 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.ticket;
 
 import java.util.ArrayList;
 import java.util.List;

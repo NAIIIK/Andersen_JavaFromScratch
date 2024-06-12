@@ -1,5 +1,10 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.ticket;
 
+import com.andersenlab.lecture_2.annotations.NullableWarning;
+import com.andersenlab.lecture_2.annotations.NullableWarningChecker;
+import com.andersenlab.lecture_2.general.Entity;
+import com.andersenlab.lecture_2.interfaces.Printable;
+import com.andersenlab.lecture_2.interfaces.Shareable;
 import lombok.Getter;
 
 import java.math.BigDecimal;
