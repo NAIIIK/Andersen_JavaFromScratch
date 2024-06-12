@@ -1,16 +1,68 @@
 package com.andersenlab.lecture_2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketService {
 
-    public static void main(String[] args) {
-        long time = System.currentTimeMillis() / 1000L;
+    List<Ticket> tickets;
 
+    public TicketService() {
+        tickets = new ArrayList<>();
+    }
+
+    public void createTicket() {
+        capacityChecker();
         Ticket emptyTicket = new Ticket();
-        Ticket limitedTicket = new Ticket("Hall 1", 303, time);
-        Ticket fullTicket = new Ticket(234, "Hall 2", 399, time, true, 'C', 5.355, 99.99);
+        tickets.add(emptyTicket);
+        emptyTicket.setId(tickets.size());
+    }
 
-        //System.out.println("Ticket with no args constructor:\n" + emptyTicket);
-        System.out.println("Ticket with limited args constructor:\n" + limitedTicket);
-        System.out.println("Ticket with all args constructor:\n" + fullTicket);
+    public void createTicket(String concertHall, int eventCode, long time) {
+        capacityChecker();
+        Ticket limitedTicket = new Ticket(concertHall, eventCode, time);
+        tickets.add(limitedTicket);
+        limitedTicket.setId(tickets.size());
+    }
+
+    public void createTicket(String concertHall, int eventCode, long time, boolean isPromo,
+                                 char stadiumSector, double maxAllowedWeight, double price) {
+        capacityChecker();
+        Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
+        tickets.add(fullTicket);
+        fullTicket.setId(tickets.size());
+    }
+
+    public void createTicket(Ticket ticket) {
+        capacityChecker();
+        tickets.add(ticket);
+        ticket.setId(tickets.size());
+    }
+
+    public Ticket getById(int id) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId() == id) return ticket;
+        }
+        System.out.println("There is no ticket in the storage with such ID");
+        return null;
+    }
+
+    public String getStorageInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("There are ")
+                .append(tickets.size())
+                .append(" tickets in the storage:\n");
+
+        for (Ticket ticket : tickets) {
+            stringBuilder.append(ticket)
+                    .append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+    private void capacityChecker() {
+        if (tickets.size() >= 10) throw new RuntimeException("Ticket limit reached");
     }
 }
