@@ -7,6 +7,10 @@ public abstract class Entity {
         return id;
     }
 
+    public void print() {
+        System.out.println("print content in console");
+    }
+
     public void setId(int id) {
         idChecker(id);
 
