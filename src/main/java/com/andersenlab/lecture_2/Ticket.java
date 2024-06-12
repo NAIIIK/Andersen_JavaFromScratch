@@ -31,8 +31,9 @@ public class Ticket extends Entity {
         this.time = time;
     }
 
-    public Ticket(String concertHall, int eventCode, long time,
+    public Ticket(int id, String concertHall, int eventCode, long time,
                   boolean isPromo, char stadiumSector, double maxAllowedWeight, double price) {
+        super(id);
         concertHallChecker(concertHall);
         eventCodeChecker(eventCode);
         stadiumSectorChecker(stadiumSector);
@@ -66,6 +67,11 @@ public class Ticket extends Entity {
 
     private void stadiumSectorChecker(char sector) {
         if (sector > 'C' || sector < 'A') throw new TicketArgumentException("Stadium sector must be 'A', 'B' or 'C'");
+    }
+
+    @Override
+    public void print() {
+        System.out.println(this);
     }
 
     @Override
