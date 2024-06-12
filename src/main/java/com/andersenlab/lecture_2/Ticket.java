@@ -1,17 +1,18 @@
 package com.andersenlab.lecture_2;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Getter
-@NoArgsConstructor
-public class Ticket extends Entity {
+public class Ticket extends Entity implements Printable, Shareable {
 
-    private String concertHall = "unknown";
+    @NullableWarning
+    private String concertHall;
+
     private int eventCode;
     private long time;
     private boolean isPromo;
@@ -20,7 +21,12 @@ public class Ticket extends Entity {
 
     private final String creationTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
 
-    private BigDecimal price = BigDecimal.valueOf(49.99);
+    @NullableWarning
+    private BigDecimal price;
+
+    public Ticket() {
+        NullableWarningChecker.checkNulls(this);
+    }
 
     public Ticket(String concertHall, int eventCode, long time) {
         concertHallChecker(concertHall);
@@ -29,6 +35,8 @@ public class Ticket extends Entity {
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
+
+        NullableWarningChecker.checkNulls(this);
     }
 
     public Ticket(int id, String concertHall, int eventCode, long time,
@@ -45,6 +53,8 @@ public class Ticket extends Entity {
         this.stadiumSector = stadiumSector;
         this.maxAllowedWeight = maxAllowedWeight;
         this.price = BigDecimal.valueOf(price);
+
+        NullableWarningChecker.checkNulls(this);
     }
 
     public void setTime(long time) {
@@ -75,6 +85,24 @@ public class Ticket extends Entity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return eventCode == ticket.eventCode && time == ticket.time &&
+                isPromo == ticket.isPromo && stadiumSector == ticket.stadiumSector &&
+                Double.compare(maxAllowedWeight, ticket.maxAllowedWeight) == 0 &&
+                Objects.equals(concertHall, ticket.concertHall) &&
+                Objects.equals(creationTime, ticket.creationTime) && Objects.equals(price, ticket.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(concertHall, eventCode, time, isPromo,
+                stadiumSector, maxAllowedWeight, creationTime, price);
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -101,5 +129,15 @@ public class Ticket extends Entity {
                 .append("\n");
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public void shareByPhone(String phoneNumber) {
+        System.out.println("ticket was sent to: " + phoneNumber);
+    }
+
+    @Override
+    public void shareByEmail(String email) {
+        System.out.println("ticket was sent to: " + email);
     }
 }
