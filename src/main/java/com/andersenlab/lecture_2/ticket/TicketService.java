@@ -1,4 +1,4 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,10 @@ public class TicketService {
         limitedTicket.setId(tickets.size());
     }
 
-    public void createTicket(String concertHall, int eventCode, long time, boolean isPromo,
+    public void createTicket(int id, String concertHall, int eventCode, long time, boolean isPromo,
                                  char stadiumSector, double maxAllowedWeight, double price) {
         capacityChecker();
-        Ticket fullTicket = new Ticket(concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
+        Ticket fullTicket = new Ticket(id, concertHall, eventCode, time, isPromo, stadiumSector, maxAllowedWeight, price);
         tickets.add(fullTicket);
         fullTicket.setId(tickets.size());
     }

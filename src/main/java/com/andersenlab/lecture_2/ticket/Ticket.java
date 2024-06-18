@@ -1,18 +1,23 @@
-package com.andersenlab.lecture_2;
+package com.andersenlab.lecture_2.ticket;
 
+import com.andersenlab.lecture_2.annotations.NullableWarning;
+import com.andersenlab.lecture_2.annotations.NullableWarningChecker;
+import com.andersenlab.lecture_2.general.Entity;
+import com.andersenlab.lecture_2.interfaces.Printable;
+import com.andersenlab.lecture_2.interfaces.Shareable;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Getter
-@NoArgsConstructor
-public class Ticket {
+public class Ticket extends Entity implements Printable, Shareable {
 
-    private int id;
-    private String concertHall = "unknown";
+    @NullableWarning
+    private String concertHall;
+
     private int eventCode;
     private long time;
     private boolean isPromo;
@@ -21,7 +26,12 @@ public class Ticket {
 
     private final String creationTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
 
-    private BigDecimal price = BigDecimal.valueOf(49.99);
+    @NullableWarning
+    private BigDecimal price;
+
+    public Ticket() {
+        NullableWarningChecker.checkNulls(this);
+    }
 
     public Ticket(String concertHall, int eventCode, long time) {
         concertHallChecker(concertHall);
@@ -30,10 +40,13 @@ public class Ticket {
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
+
+        NullableWarningChecker.checkNulls(this);
     }
 
-    public Ticket(String concertHall, int eventCode, long time,
+    public Ticket(int id, String concertHall, int eventCode, long time,
                   boolean isPromo, char stadiumSector, double maxAllowedWeight, double price) {
+        super(id);
         concertHallChecker(concertHall);
         eventCodeChecker(eventCode);
         stadiumSectorChecker(stadiumSector);
@@ -45,50 +58,18 @@ public class Ticket {
         this.stadiumSector = stadiumSector;
         this.maxAllowedWeight = maxAllowedWeight;
         this.price = BigDecimal.valueOf(price);
-    }
 
-    public void setId(int id) {
-        idChecker(id);
-
-        this.id = id;
-    }
-
-    public void setConcertHall(String concertHall) {
-        concertHallChecker(concertHall);
-
-        this.concertHall = concertHall;
-    }
-
-    public void setEventCode(int eventCode) {
-        eventCodeChecker(eventCode);
-
-        this.eventCode = eventCode;
+        NullableWarningChecker.checkNulls(this);
     }
 
     public void setTime(long time) {
         this.time = time;
     }
 
-    public void setPromo(boolean promo) {
-        isPromo = promo;
-    }
-
     public void setStadiumSector(char stadiumSector) {
         stadiumSectorChecker(stadiumSector);
 
         this.stadiumSector = stadiumSector;
-    }
-
-    public void setMaxAllowedWeight(double maxAllowedWeight) {
-        this.maxAllowedWeight = maxAllowedWeight;
-    }
-
-    public void setPrice(double price) {
-        this.price = BigDecimal.valueOf(price);
-    }
-
-    private void idChecker(int id) {
-        if (id / 1000 > 9) throw new TicketArgumentException("ID must contain no more than 4 digits");
     }
 
     private void concertHallChecker(String hall) {
@@ -104,13 +85,36 @@ public class Ticket {
     }
 
     @Override
+    public void print() {
+        System.out.println(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return eventCode == ticket.eventCode && time == ticket.time &&
+                isPromo == ticket.isPromo && stadiumSector == ticket.stadiumSector &&
+                Double.compare(maxAllowedWeight, ticket.maxAllowedWeight) == 0 &&
+                Objects.equals(concertHall, ticket.concertHall) &&
+                Objects.equals(creationTime, ticket.creationTime) && Objects.equals(price, ticket.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(concertHall, eventCode, time, isPromo,
+                stadiumSector, maxAllowedWeight, creationTime, price);
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("Ticket\n")
                 .append("******")
                 .append("\nID: ")
-                .append(id)
+                .append(getId())
                 .append("\nConcert hall: ")
                 .append(concertHall)
                 .append("\nEvent code: ")
@@ -130,5 +134,15 @@ public class Ticket {
                 .append("\n");
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public void shareByPhone(String phoneNumber) {
+        System.out.println("ticket was sent to: " + phoneNumber);
+    }
+
+    @Override
+    public void shareByEmail(String email) {
+        System.out.println("ticket was sent to: " + email);
     }
 }
