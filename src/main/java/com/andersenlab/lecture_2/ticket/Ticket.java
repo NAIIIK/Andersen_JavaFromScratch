@@ -114,7 +114,7 @@ public class Ticket extends Entity implements Printable, Shareable {
         stringBuilder.append("Ticket\n")
                 .append("******")
                 .append("\nID: ")
-                .append(id)
+                .append(getId())
                 .append("\nConcert hall: ")
                 .append(concertHall)
                 .append("\nEvent code: ")

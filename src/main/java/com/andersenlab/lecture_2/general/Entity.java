@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public abstract class Entity {
-    public int id;
+    private int id;
 
     public Entity(int id) {
         idChecker(id);

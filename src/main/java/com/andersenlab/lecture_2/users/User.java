@@ -14,6 +14,6 @@ public abstract class User extends Entity {
     }
 
     public void printRole() {
-        System.out.println(id + ": " + role);
+        System.out.println(getId() + ": " + role);
     }
 }
