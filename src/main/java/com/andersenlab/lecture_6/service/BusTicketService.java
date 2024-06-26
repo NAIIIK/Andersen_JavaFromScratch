@@ -3,6 +3,7 @@ package com.andersenlab.lecture_6.service;
 import com.andersenlab.lecture_6.bus_ticket.BusTicket;
 import com.andersenlab.lecture_6.bus_ticket.TicketType;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class BusTicketService {
         tickets = new ArrayList<>();
     }
 
-    public void createTicket(int id, TicketType ticketType, LocalDate startDate, double price) {
+    public void createTicket(int id, TicketType ticketType, LocalDate startDate, BigDecimal price) {
         BusTicket busTicket = new BusTicket(id, ticketType, startDate, price);
         tickets.add(busTicket);
         System.out.println("Ticket was created and placed in the storage");
@@ -47,14 +48,18 @@ public class BusTicketService {
         }
     }
 
-    public void searchTicketsByPrice(double min, double max) {
-        List<BusTicket> result = tickets.stream()
-                .filter(t -> t.getPrice() >= min && t.getPrice() <= max)
-                .toList();
-        if (!result.isEmpty()) {
-            result.forEach(System.out::println);
+    public void searchTicketsByPrice(BigDecimal min, BigDecimal max) {
+        if (min != null && max != null) {
+            List<BusTicket> result = tickets.stream()
+                    .filter(t -> t.getPrice().compareTo(min) >= 0 && t.getPrice().compareTo(max) <= 0)
+                    .toList();
+            if (!result.isEmpty()) {
+                result.forEach(System.out::println);
+            } else {
+                System.out.printf("There are no tickets in the storage within such price range {%s, %s}", min, max);
+            }
         } else {
-            System.out.printf("There are no tickets in the storage within such price range {%s, %s}", min, max);
+            throw new IllegalArgumentException("min and max values can not be null");
         }
     }
 

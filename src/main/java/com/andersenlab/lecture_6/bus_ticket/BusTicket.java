@@ -2,6 +2,7 @@ package com.andersenlab.lecture_6.bus_ticket;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -13,9 +14,9 @@ public class BusTicket {
 
     private LocalDate startDate;
 
-    private double price;
+    private BigDecimal price;
 
-    public BusTicket(int id, TicketType ticketType, LocalDate startDate, double price) {
+    public BusTicket(int id, TicketType ticketType, LocalDate startDate, BigDecimal price) {
         this.id = id;
         this.ticketType = ticketType;
         this.startDate = startDate;
