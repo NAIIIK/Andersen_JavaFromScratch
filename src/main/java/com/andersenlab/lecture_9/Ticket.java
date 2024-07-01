@@ -21,7 +21,7 @@ public class Ticket {
     private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Ticket() {
