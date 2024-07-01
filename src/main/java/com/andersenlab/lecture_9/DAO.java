@@ -72,4 +72,19 @@ public class DAO {
             transaction.commit();
         }
     }
+
+    public void updateUser(SessionFactory sessionFactory, User updatedUser) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.merge(updatedUser);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        }
+    }
 }
